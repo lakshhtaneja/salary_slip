@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class SalarySlip{
 
-    void input(){
+    static void input(){
         Scanner scanner= new Scanner(System.in);
 
         System.out.println("Enter your Id: ");
@@ -19,7 +19,7 @@ class SalarySlip{
 
     }
 
-    void compute(int id, String name, double basicSalary){
+    static void compute(int id, String name, double basicSalary){
         double hra = basicSalary * 0.5;
         double da = basicSalary * 0.2;
         double ta = basicSalary * 0.4;
@@ -33,7 +33,7 @@ class SalarySlip{
 
     }
 
-        void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
+    static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
         System.out.println("Id: " + id);
         System.out.println("Name: " + name + "\n");
         System.out.println("Basic Salary: " + basicSalary);
@@ -47,6 +47,7 @@ class SalarySlip{
     }
 
     public static void main(String[] args) {
-     
+        // SalarySlip sp = new SalarySlip();
+        input();
     }
 }
