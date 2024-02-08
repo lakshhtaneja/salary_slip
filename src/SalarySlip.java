@@ -3,7 +3,7 @@ import java.util.Scanner;
 class SalarySlip{
 
     static String properCase(String name){
-        String names[] = name.split("");
+        String names[] = name.split(" ");
         String fullName = "";
         for (int i = 0 ; i < names.length; i++){
             String n = names[i];
@@ -11,6 +11,7 @@ class SalarySlip{
             String capLetter = String.valueOf(firstChar).toUpperCase();
             String remString = n.substring(1).toLowerCase();
             String capitalized = capLetter + remString;
+
             fullName = fullName + capitalized + "";
         }
         return fullName.trim();
@@ -49,7 +50,7 @@ class SalarySlip{
 
     static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
         System.out.println("Id: " + id);
-        System.out.println("Name: " + name + "\n");
+        System.out.println("Name: " + properCase(name) + "\n");
         System.out.println("Basic Salary: " + basicSalary);
         System.out.print("Earning Allowances\t\t");
         System.out.println("Deductions");
