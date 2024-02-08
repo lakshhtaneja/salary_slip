@@ -2,6 +2,20 @@ import java.util.Scanner;
 
 class SalarySlip{
 
+    static String properCase(String name){
+        String names[] = name.split("");
+        String fullName = "";
+        for (int i = 0 ; i < names.length; i++){
+            String n = names[i];
+            char firstChar = n.charAt(0);
+            String capLetter = String.valueOf(firstChar).toUpperCase();
+            String remString = n.substring(1).toLowerCase();
+            String capitalized = capLetter + remString;
+            fullName = fullName + capitalized + "";
+        }
+        return fullName.trim();
+    }
+
     static void input(){
         Scanner scanner= new Scanner(System.in);
 
