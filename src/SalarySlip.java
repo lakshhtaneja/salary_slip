@@ -1,4 +1,6 @@
+import java.util.Locale;
 import java.util.Scanner;
+import java.text.NumberFormat; 
 
 class SalarySlip{
 
@@ -8,6 +10,12 @@ class SalarySlip{
            fullName += String.valueOf(n.charAt(0)).toUpperCase() + n.substring(1);
         }
         return fullName.trim();
+    }
+
+    static String currencyFormat(double number, Locale locale){  
+        NumberFormat formatter=NumberFormat.getCurrencyInstance(locale);
+        String currency = formatter.format(number);
+        return currency;
     }
 
     static void input(){
@@ -28,22 +36,28 @@ class SalarySlip{
     }
 
     static void compute(int id, String name, double basicSalary){
+        Locale locale = Locale.of("hi", "IN");
         double hra = basicSalary * 0.5;
         double da = basicSalary * 0.2;
         double ta = basicSalary * 0.4;
         double ma = basicSalary * 0.25;
-        
         double pf = basicSalary * 0.05;
 
-        double grossSalary = basicSalary + hra + da + ta + ma;
+        String hra_f = currencyFormat(hra, locale);
+        String da_f = currencyFormat(da, locale);
+        String ta_f = currencyFormat(ta, locale);
+        String ma_f = currencyFormat(ma, locale);
+        String pf_f = currencyFormat(pf, locale);
+        String basicSalary_f = currencyFormat(basicSalary, locale);
 
-        print(id, name, basicSalary, hra, pf, da, ta, ma);
+        print(id, name, basicSalary_f, hra_f, pf_f, da_f, ta_f, ma_f);
 
     }
-
-    static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
-        System.out.println("Id: " + id);
-        System.out.println("Name: " + properCase(name) + "\n");
+    
+    static void print(int id, String name, String basicSalary, String hra, String pf, String da, String ta, String ma){
+       
+        System.out.println("\nId: " + id);
+        System.out.println("Name: " + properCase(name) + "\n"); 
         System.out.println("Basic Salary: " + basicSalary);
         System.out.print("Earning Allowances\t\t");
         System.out.println("Deductions");
@@ -55,7 +69,6 @@ class SalarySlip{
     }
 
     public static void main(String[] args) {
-        // SalarySlip sp = new SalarySlip();
         input();
     }
 }
