@@ -12,14 +12,35 @@ class SalarySlip{
         return fullName.trim();
     }
 
-    static String currencyFormat(double number, Locale locale){  
-        NumberFormat formatter=NumberFormat.getCurrencyInstance(locale);
-        String currency = formatter.format(number);
-        return currency;
+    static String currencyFormat(double unformatted, Locale locale){  
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); //reference variable
+        String formatted = formatter.format(unformatted);
+        return formatted;
     }
 
     static void input(){
         Scanner scanner= new Scanner(System.in);
+        Locale locale = Locale.US;
+
+        System.out.println("Press 1 for English");
+        System.out.println("हिंदी के लिए 2 दबाएँ");
+        System.out.println("Appuyez sur 3 pour le français");
+        
+        int choice = scanner.nextInt();
+        
+        switch (choice) {
+            case 1:
+                break;
+            case 2:
+                locale = Locale.of("hi", "IN");
+                break;
+            case 3:
+                locale = Locale.FRANCE;
+                break;
+            default:
+                System.out.println("Invalid Choice, default language [English(US)] set");
+                break;
+        }
 
         System.out.println("Enter your Id: ");
         int id = scanner.nextInt();
@@ -30,13 +51,13 @@ class SalarySlip{
 
         System.out.println("Enter your basic Salary: ");
         double basicSalary = scanner.nextDouble();
-        compute(id, name, basicSalary);
+        compute(id, name, basicSalary, locale);
         scanner.close();
 
     }
 
-    static void compute(int id, String name, double basicSalary){
-        Locale locale = Locale.of("hi", "IN");
+    static void compute(int id, String name, double basicSalary, Locale locale){
+
         double hra = basicSalary * 0.5;
         double da = basicSalary * 0.2;
         double ta = basicSalary * 0.4;
