@@ -21,9 +21,11 @@ class SalarySlip{
         return formatted;
     }
 
-    static String formattedDate(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd mm yyyy");
+    static String formattedDate(LocalDate date){  // Define the pattern for formatting
+        String pattern = "EEEE, dd MMMM, yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, locale);
         String formatted = formatter.format(date);
+        
         return formatted;
     }
 
@@ -71,30 +73,22 @@ class SalarySlip{
         double ta = basicSalary * 0.4;
         double ma = basicSalary * 0.25;
         double pf = basicSalary * 0.05;
-
-        String hra_f = formattedCurrency(hra, locale);
-        String da_f = formattedCurrency(da, locale);
-        String ta_f = formattedCurrency(ta, locale);
-        String ma_f = formattedCurrency(ma, locale);
-        String pf_f = formattedCurrency(pf, locale);
-        String basicSalary_f = formattedCurrency(basicSalary, locale);
-
-        print(id, name, basicSalary_f, hra_f, pf_f, da_f, ta_f, ma_f);
+        print(id, name, basicSalary, hra, pf, da, ta, ma);
 
     }
     
-    static void print(int id, String name, String basicSalary, String hra, String pf, String da, String ta, String ma){
-       System.out.println("\n\t\t\t" + currentDate);
+    static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
+        System.out.println("\n\t\t\t" + formattedDate(currentDate));
         System.out.println("\nId: " + id);
         System.out.println("Name: " + properCase(name) + "\n"); 
-        System.out.println("Basic Salary: " + basicSalary);
+        System.out.println("Basic Salary: " + formattedCurrency(basicSalary, locale));
         System.out.print("Earning Allowances\t\t");
         System.out.println("Deductions");
-        System.out.print("HRA: " + hra + "\t\t\t");
-        System.out.println("PF: " + pf);
-        System.out.println("DA: " + da);
-        System.out.println("TA: " + ta);
-        System.out.println("MA: " + ma);
+        System.out.print("HRA: " + formattedCurrency(hra, locale) + "\t\t\t");
+        System.out.println("PF: " + formattedCurrency(pf, locale));
+        System.out.println("DA: " + formattedCurrency(da, locale));
+        System.out.println("TA: " + formattedCurrency(ta, locale));
+        System.out.println("MA: " + formattedCurrency(ma, locale));
     }
 
     public static void main(String[] args) {
