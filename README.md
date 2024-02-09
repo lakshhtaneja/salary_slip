@@ -2,6 +2,8 @@
 
 Inputs name, id, and basic salary and generates a slip of gross salary
 
+Additional
+- Locale added, internationalized
 ## Folder Structure
 
 The workspace contains two folders by default, where:
