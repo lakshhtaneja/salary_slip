@@ -1,11 +1,10 @@
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
+import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter; 
 
 class SalarySlip{
-    static LocalDate currentDate = LocalDate.now();
     static Locale locale = Locale.US;
     static String properCase(String name){
         String fullName = "";
@@ -15,17 +14,16 @@ class SalarySlip{
         return fullName.trim();
     }
 
-    static String formattedCurrency(double unformatted, Locale locale){  
+    static String formatCurrency(double unformatted, Locale locale){  
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); //reference variable
         String formatted = formatter.format(unformatted);
         return formatted;
     }
 
-    static String formattedDate(LocalDate date){  // Define the pattern for formatting
-        String pattern = "EEEE, dd MMMM, yyyy";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, locale);
+    static String formatDate(){ 
+        Date date = new Date();
+        DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, locale);
         String formatted = formatter.format(date);
-        
         return formatted;
     }
 
@@ -78,17 +76,17 @@ class SalarySlip{
     }
     
     static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
-        System.out.println("\n\t\t\t" + formattedDate(currentDate));
-        System.out.println("\nId: " + id);
+        System.out.println("\n\t\t\t" + formatDate());
+        System.out.println("Id: " + id);
         System.out.println("Name: " + properCase(name) + "\n"); 
-        System.out.println("Basic Salary: " + formattedCurrency(basicSalary, locale));
+        System.out.println("Basic Salary: " + formatCurrency(basicSalary, locale));
         System.out.print("Earning Allowances\t\t");
         System.out.println("Deductions");
-        System.out.print("HRA: " + formattedCurrency(hra, locale) + "\t\t\t");
-        System.out.println("PF: " + formattedCurrency(pf, locale));
-        System.out.println("DA: " + formattedCurrency(da, locale));
-        System.out.println("TA: " + formattedCurrency(ta, locale));
-        System.out.println("MA: " + formattedCurrency(ma, locale));
+        System.out.print("HRA: " + formatCurrency(hra, locale) + "\t\t\t");
+        System.out.println("PF: " + formatCurrency(pf, locale));
+        System.out.println("DA: " + formatCurrency(da, locale));
+        System.out.println("TA: " + formatCurrency(ta, locale));
+        System.out.println("MA: " + formatCurrency(ma, locale));
     }
 
     public static void main(String[] args) {
