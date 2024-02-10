@@ -1,11 +1,17 @@
 import java.util.Date;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 
 class SalarySlip{
+    static ResourceBundle rb;
     static Locale locale = Locale.US;
+
+    static void loadResourceBundle(){
+        rb = ResourceBundle.getBundle("message", locale);
+    }
     static String properCase(String name){
         String fullName = "";
         for (String n: name.split(" ")){
@@ -32,7 +38,7 @@ class SalarySlip{
 
         System.out.println("Press 1 for English");
         System.out.println("Appuyez sur 2 pour le français");
-        // System.out.println("हिंदी के लिए 3 दबाएँ");
+        System.out.println("हिंदी के लिए 3 दबाएँ");
         
         int choice = scanner.nextInt();
         
@@ -42,22 +48,24 @@ class SalarySlip{
             case 2:
                 locale = Locale.FRANCE;
                 break;
-             // case 3:
-             //     locale = Locale.of("hi", "IN"); //>= JAVA 19
-             //     break;
+            case 3:
+                locale = Locale.of("hi", "IN"); //>= JAVA 19
+                break;
             default:
                 System.out.println("Invalid Choice, default language [English(US)] set");
                 break;
         }
 
-        System.out.println("Enter your Id: ");
+        loadResourceBundle();
+
+        System.out.println(rb.getString("id.msg") + ": ");
         int id = scanner.nextInt();
         scanner.nextLine();
         
-        System.out.println("Enter your name: ");
+        System.out.println(rb.getString("name.msg") + ": ");
         String name = scanner.nextLine();
 
-        System.out.println("Enter your basic Salary: ");
+        System.out.println(rb.getString("salary.msg"));
         double basicSalary = scanner.nextDouble();
         compute(id, name, basicSalary, locale);
         scanner.close();
@@ -76,12 +84,12 @@ class SalarySlip{
     }
     
     static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
-        System.out.println("\n\t\t\t" + formatDate());
+        System.out.println(rb.getString("date.msg")+ formatDate());
         System.out.println("Id: " + id);
         System.out.println("Name: " + properCase(name) + "\n"); 
         System.out.println("Basic Salary: " + formatCurrency(basicSalary, locale));
-        System.out.print("Earning Allowances\t\t");
-        System.out.println("Deductions");
+        System.out.print(rb.getString("allowances.msg") + "\t\t");
+        System.out.println(rb.getString("deductions.msg"));
         System.out.print("HRA: " + formatCurrency(hra, locale) + "\t\t\t");
         System.out.println("PF: " + formatCurrency(pf, locale));
         System.out.println("DA: " + formatCurrency(da, locale));
