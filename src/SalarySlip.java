@@ -84,7 +84,7 @@ class SalarySlip{
     }
     
     static void print(int id, String name, double basicSalary, double hra, double pf, double da, double ta, double ma){
-        System.out.println(rb.getString("date.msg")+ formatDate());
+        System.out.println(rb.getString("date.msg")+" "+ formatDate());
         System.out.println("Id: " + id);
         System.out.println("Name: " + properCase(name) + "\n"); 
         System.out.println("Basic Salary: " + formatCurrency(basicSalary, locale));
